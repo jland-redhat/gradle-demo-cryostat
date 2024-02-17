@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.restservice.GreetingControllerTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-16T19:23:19" hostname="fedora" time="0.567">
+<testsuite name="com.example.restservice.GreetingControllerTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-17T13:24:41" hostname="fedora" time="2.961">
   <properties/>
-  <testcase name="noParamGreetingShouldReturnDefaultMessage()" classname="com.example.restservice.GreetingControllerTests" time="0.56"/>
-  <testcase name="paramGreetingShouldReturnTailoredMessage()" classname="com.example.restservice.GreetingControllerTests" time="0.006"/>
-  <system-out><![CDATA[14:23:18.051 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.restservice.GreetingControllerTests]: GreetingControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-14:23:18.131 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.restservice.RestServiceApplication for test class com.example.restservice.GreetingControllerTests
+  <testcase name="noParamGreetingShouldReturnDefaultMessage()" classname="com.example.restservice.GreetingControllerTests" time="2.925"/>
+  <testcase name="paramGreetingShouldReturnTailoredMessage()" classname="com.example.restservice.GreetingControllerTests" time="0.03"/>
+  <system-out><![CDATA[08:24:32.878 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.restservice.GreetingControllerTests]: GreetingControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+08:24:33.329 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.restservice.RestServiceApplication for test class com.example.restservice.GreetingControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,13 +14,19 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-16T14:23:18.362-05:00  INFO 35607 --- [    Test worker] c.e.restservice.GreetingControllerTests  : Starting GreetingControllerTests using Java 17.0.9 with PID 35607 (started by jland in /home/jland/Documents/RedHat/clients/Paychex/demo)
-2024-02-16T14:23:18.363-05:00  INFO 35607 --- [    Test worker] c.e.restservice.GreetingControllerTests  : No active profile set, falling back to 1 default profile: "default"
-2024-02-16T14:23:19.577-05:00  INFO 35607 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-16T14:23:19.578-05:00  INFO 35607 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-16T14:23:19.586-05:00  INFO 35607 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2024-02-16T14:23:19.597-05:00  INFO 35607 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 17 ms
-2024-02-16T14:23:19.636-05:00  INFO 35607 --- [    Test worker] c.e.restservice.GreetingControllerTests  : Started GreetingControllerTests in 1.436 seconds (process running for 2.064)
+2024-02-17T08:24:34.685-05:00  INFO 124737 --- [    Test worker] c.e.restservice.GreetingControllerTests  : Starting GreetingControllerTests using Java 17.0.9 with PID 124737 (started by jland in /home/jland/Documents/RedHat/clients/Paychex/demo)
+2024-02-17T08:24:34.691-05:00  INFO 124737 --- [    Test worker] c.e.restservice.GreetingControllerTests  : No active profile set, falling back to 1 default profile: "default"
+2024-02-17T08:24:40.054-05:00  INFO 124737 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-17T08:24:40.056-05:00  INFO 124737 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-17T08:24:40.064-05:00  INFO 124737 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2024-02-17T08:24:40.850-05:00  INFO 124737 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9000 (http)
+2024-02-17T08:24:40.893-05:00  INFO 124737 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-17T08:24:40.896-05:00  INFO 124737 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-17T08:24:41.128-05:00  INFO 124737 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-17T08:24:41.130-05:00  INFO 124737 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 915 ms
+2024-02-17T08:24:41.234-05:00  INFO 124737 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-17T08:24:41.415-05:00  INFO 124737 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9000 (http) with context path ''
+2024-02-17T08:24:41.477-05:00  INFO 124737 --- [    Test worker] c.e.restservice.GreetingControllerTests  : Started GreetingControllerTests in 7.679 seconds (process running for 11.701)
 
 MockHttpServletRequest:
       HTTP Method = GET
