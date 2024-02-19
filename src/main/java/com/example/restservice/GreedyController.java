@@ -1,5 +1,7 @@
 package com.example.restservice;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -29,15 +31,11 @@ public class GreedyController {
 	@GetMapping("/memory/consume/{mbs}/{time}")
 	public String consumeMemory(@PathVariable(value = "mbs") Integer arraySize, @PathVariable(value = "time") Integer time) { 
 			try {
-
-			// Allocate memory by creating a large array
-			byte[] byteArray = new byte[(int) arraySize];
-			logger.info("Allocated " + (arraySize / (1024 * 1024)) + " MB of memory.");
-			
-			// Optionally, populate the array to ensure memory is actually used
-			for (int i = 0; i < byteArray.length; i++) {
-					byteArray[i] = (byte) i;
-			}
+				
+        List<byte[]> memoryList = new ArrayList<>();
+        for (int i = 0; i < arraySize; i++) {
+            memoryList.add(new byte[1024 * 1024]); // Allocate 1 MB of memory
+        }
 			sleep(time);
 			return "Freeing (consumed " + arraySize + " MB of memory)";
 		} catch (Exception e) {
@@ -47,3 +45,5 @@ public class GreedyController {
 	}
 }
  
+
+
