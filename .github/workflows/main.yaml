@@ -34,5 +34,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
+        file: ./Continerfile
         push: true
         tags: quay.io/jland/gradle-demo:${{ steps.extract_tag.outputs.VERSION }}

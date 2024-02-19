@@ -30,3 +30,10 @@ wait
 ## Create on Openshift
 
 When creating in Openshift if using the new-app feature set `JAVA_APP_JAR` to `/deployments/build/libs/rest-service-0.0.1-SNAPSHOT.jar`
+
+## Run Container Locally
+
+```sh
+podman build . -t gradle-demo
+podman run -p 8080:8080 -p 9000:9000 localhost/gradle-demo:latest
+```
