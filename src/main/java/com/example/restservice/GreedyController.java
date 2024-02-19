@@ -17,7 +17,7 @@ public class GreedyController {
 
 	@GetMapping("/sleep/{time}")
 	public String sleep(@PathVariable(value = "time") Integer time) throws InterruptedException {
-		System.out.println("Sleeping for 10 seconds...");
+		System.out.println("Sleeping for " + time + " seconds...");
 		Thread.sleep(time * 1000);
 		return "Who dares to wake me up? (slept for " + time + " seconds)";
 

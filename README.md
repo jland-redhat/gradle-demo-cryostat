@@ -20,11 +20,17 @@ Created a basic demo here to show how we can setup a management port inorder to 
 ## Useful Commands
 
 Curl the Sleep Endpoint 4 times
-```
+
+```sh
 for i in {1..4}; do
     curl -s localhost:8080/sleep/10 &
 done
 wait
+```
+
+Curl every 1 second
+```sh
+watch -n 1 curl localhost:8080/sleep/3
 ```
 
 ## Create on Openshift
@@ -41,3 +47,5 @@ podman run -p 8080:8080 -p 9000:9000 localhost/gradle-demo:latest
 ## Github Actions
 
 Repos setup to push to quay using github actions
+
+Does require Q
