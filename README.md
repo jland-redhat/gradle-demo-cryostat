@@ -37,3 +37,7 @@ When creating in Openshift if using the new-app feature set `JAVA_APP_JAR` to `/
 podman build . -t gradle-demo
 podman run -p 8080:8080 -p 9000:9000 localhost/gradle-demo:latest
 ```
+
+## Github Actions
+
+Repos setup to push to quay using github actions
