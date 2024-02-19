@@ -24,11 +24,9 @@ public class GreedyController {
 	}
 
 
-	@GetMapping("/memory/consume")
-	public String consumeMemory() { 
+	@GetMapping("/memory/consume/{mbs}")
+	public String consumeMemory(@PathVariable(value = "mbs") Integer arraySize) { 
 			try {
-			// Define the size of the array to consume memory
-			long arraySize = 100; // Adjust the size as needed
 
 			// Allocate memory by creating a large array
 			byte[] byteArray = new byte[(int) arraySize];

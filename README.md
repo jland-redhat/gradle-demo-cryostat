@@ -6,10 +6,13 @@ Created a basic demo here to show how we can setup a management port inorder to 
 
 **/greet** Writes back a greeting
 **/sleep/<SECONDS>** Sleeps for x seconds
+**/memory/consume/{mbs}** Consumes X mbs of memory
 
-## Properties 
+## Properties
 
 `server.tomcat.threads.max` set to 1 meaning only a single connection can be handled at a time.
+
+This can be overwritten by setting the `SERVER_TOMCAT_THREADS_MAX` environment variable
 
 ## Run Code
 
@@ -30,7 +33,10 @@ wait
 
 Curl every 1 second
 ```sh
-watch -n 1 curl localhost:8080/sleep/3
+while true; do
+    curl -s localhost:8080/sleep/10 &
+    sleep 1
+done
 ```
 
 ## Create on Openshift
@@ -48,4 +54,4 @@ podman run -p 8080:8080 -p 9000:9000 localhost/gradle-demo:latest
 
 Repos setup to push to quay using github actions
 
-Does require Q
+Does require `QUAY_USERNAME` and `QUAY_TOKEN` to be set in the github secrets.
