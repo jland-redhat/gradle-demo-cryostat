@@ -16,7 +16,7 @@ This can be overwritten by setting the `SERVER_TOMCAT_THREADS_MAX` environment v
 
 ## Run Code
 
-```
+```sh
 ./gradlew bootRun
 ```
 
