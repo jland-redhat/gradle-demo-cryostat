@@ -20,6 +20,18 @@ This can be overwritten by setting the `SERVER_TOMCAT_THREADS_MAX` environment v
 ./gradlew bootRun
 ```
 
+### Build with Cryostat Agent locally
+
+```sh
+export JAVA_OPTS="-javaagent"
+```
+
+### Update Containerfile
+
+```sh
+export JAVA_OPTS="-javaagent:/deployments/app/cryostat-agent-shaded.jar"
+```
+
 ## Useful Commands
 
 Curl the Sleep Endpoint 4 times

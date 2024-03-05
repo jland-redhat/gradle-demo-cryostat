@@ -22,6 +22,12 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
+    - name: Make distribution folder
+      run: mkdir distribution
+
+    - name: Untar dist
+      run: tar -xf build/distributions/rest-service-0.0.1-SNAPSHOT.tar  -C distribution --strip-components=1
+
     - name: Login to Quay.io
       uses: docker/login-action@v1 
       with:
@@ -35,7 +41,7 @@ jobs:
         context: .
         file: Containerfile
         push: true
-        tags: quay.io/jland/gradle-demo:${{ github.ref_name }}
+        tags: quay.io/jland/gradle-demo-cryostat:${{ github.ref_name }}
 
     - name: Build and push LATEST Docker image
       uses: docker/build-push-action@v2
@@ -43,5 +49,5 @@ jobs:
         context: .
         file: Containerfile
         push: true
-        tags: quay.io/jland/gradle-demo:latest
+        tags: quay.io/jland/gradle-demo-cryostat:latest
 

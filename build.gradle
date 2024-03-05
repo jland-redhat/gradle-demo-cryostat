@@ -2,6 +2,10 @@ plugins {
 	id 'org.springframework.boot' version '3.2.0'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'java'
+	id 'application'
+  id("com.ryandens.javaagent-application") version "0.4.2"
+  id("com.google.cloud.tools.jib") version "3.1.4"
+  id("com.ryandens.javaagent-jib") version "0.4.2"
 }
 
 jar {
@@ -14,16 +18,26 @@ sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
+  maven {
+    	url "https://maven.repository.redhat.com/earlyaccess/all/"
+	}
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'io.micrometer:micrometer-registry-prometheus'
+	javaagent 'io.cryostat:cryostat-agent:0.3.0.redhat-00003:shaded'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 
 }
 
 test {
 	useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = 'registry.access.redhat.com/ubi9/openjdk-17'
+    }
 }
