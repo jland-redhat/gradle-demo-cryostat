@@ -1,12 +1,6 @@
-# Gradle Demo
+# Gradle Cryostat Demo
 
-Created a basic demo here to show how we can setup a management port inorder to handel our liveness probes even if the network is totally jammed up with traffic.
-
-## Endpoints
-
-**/greet** Writes back a greeting
-**/sleep/<SECONDS>** Sleeps for x seconds
-**/memory/consume/{mbs}** Consumes X mbs of memory
+Updated gradle demo to demo cryostat
 
 ## Properties
 
@@ -32,25 +26,6 @@ export JAVA_OPTS="-javaagent"
 export JAVA_OPTS="-javaagent:/deployments/app/cryostat-agent-shaded.jar"
 ```
 
-## Useful Commands
-
-Curl the Sleep Endpoint 4 times
-
-```sh
-for i in {1..4}; do
-    curl -s localhost:8080/sleep/10 &
-done
-wait
-```
-
-Curl every 1 second
-```sh
-while true; do
-    curl -s localhost:8080/sleep/10 &
-    sleep 1
-done
-```
-
 ## Create on Openshift
 
 When creating in Openshift if using the new-app feature set `JAVA_APP_JAR` to `/deployments/build/libs/rest-service-0.0.1-SNAPSHOT.jar`
@@ -67,3 +42,48 @@ podman run -p 8080:8080 -p 9000:9000 localhost/gradle-demo:latest
 Repos setup to push to quay using github actions
 
 Does require `QUAY_USERNAME` and `QUAY_TOKEN` to be set in the github secrets.
+
+## Deployment
+
+Deployments must include the following fields
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+...
+spec:
+  ...
+  template:
+    ...
+    spec:
+      containers:
+        - name: sample-app
+          env:
+            - name: CRYOSTAT_AGENT_APP_NAME
+              value: "myapp"
+              # Replace this with the Kubernetes DNS record
+              # for the Cryostat Service
+            - name: CRYOSTAT_AGENT_BASEURI
+              value: "http://cryostat.cryostat.mycluster.svc:8181"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: CRYOSTAT_AGENT_CALLBACK
+              value: "http://$(POD_IP):9977" 
+              # Replace "abcd1234" with a base64-encoded authentication token
+            - name: CRYOSTAT_AGENT_AUTHORIZATION 
+              value: "Bearer abcd1234"
+            - name: CRYOSTAT_AGENT_API_WRITES_ENABLED 
+              value: true
+            - name: JAVA_OPTS
+              value: "javaagent:/deployments/app/cryostat-agent-shaded.jar"
+          ports:
+            - containerPort: 9977
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
+```
+
+Use `oc create token default` to create the bearer token
