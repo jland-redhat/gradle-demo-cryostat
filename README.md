@@ -61,10 +61,8 @@ spec:
           env:
             - name: CRYOSTAT_AGENT_APP_NAME
               value: "myapp"
-              # Replace this with the Kubernetes DNS record
-              # for the Cryostat Service
             - name: CRYOSTAT_AGENT_BASEURI
-              value: "http://cryostat.cryostat.mycluster.svc:8181"
+              value: "http://<NAMESAPCE>.cryostat.svc.cluster.local:8181"
             - name: POD_IP
               valueFrom:
                 fieldRef:
@@ -72,12 +70,11 @@ spec:
             - name: CRYOSTAT_AGENT_CALLBACK
               value: "http://$(POD_IP):9977" 
               # Replace "abcd1234" with a base64-encoded authentication token
+              # See the note below for creating the Bear Token
             - name: CRYOSTAT_AGENT_AUTHORIZATION 
               value: "Bearer abcd1234"
             - name: CRYOSTAT_AGENT_API_WRITES_ENABLED 
               value: true
-            - name: JAVA_OPTS
-              value: "javaagent:/deployments/app/cryostat-agent-shaded.jar"
           ports:
             - containerPort: 9977
               protocol: TCP
@@ -86,4 +83,28 @@ spec:
 status: {}
 ```
 
-Use `oc create token default` to create the bearer token
+
+Use `oc create token cryostat-example` to create the bearer token (note I called my install cryostat-example so it created an SA with the same name)
+
+## Service
+
+Service with the following ports:
+
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: cryostat-demo-service
+spec:
+  ports:
+    - name: cryostat-agent
+      protocol: TCP
+      port: 9977
+      targetPort: 9977
+    - name: jmx-agent
+      protocol: TCP
+      port: 9091
+      targetPort: 9091
+  selector:
+    app: cryostat-demo
+```
