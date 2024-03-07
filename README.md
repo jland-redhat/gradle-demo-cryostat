@@ -23,7 +23,7 @@ export JAVA_OPTS="-javaagent"
 ### Update Containerfile
 
 ```sh
-export JAVA_OPTS="-javaagent:/deployments/app/cryostat-agent-shaded.jar"
+ENV JAVA_TOOL_OPTIONS="-javaagent:/deployments/app/cryostat-agent-shaded.jar"
 ```
 
 ## Create on Openshift
